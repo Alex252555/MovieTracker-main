@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MovieTracker.Domain\MovieTracker.Domain.csproj" />
+    <ProjectReference Include="..\MovieTracker.Application\MovieTracker.Application.csproj" />
+  </ItemGroup>
+
+</Project>

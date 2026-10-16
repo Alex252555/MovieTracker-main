@@ -1,0 +1,33 @@
+@page "/register"
+
+<PageTitle>Create account</PageTitle>
+
+<section class="auth-wrap page-section">
+    <div class="auth-card wide">
+        <span class="brand-mark">M</span>
+        <span class="eyebrow">START YOUR COLLECTION</span>
+        <h1>Create an account</h1>
+        <p>Your watchlist and ratings will live here in a future exercise.</p>
+        <form @onsubmit="Submit" @onsubmit:preventDefault>
+            <label>Display name<input @bind="displayName" required placeholder="How should we call you?" /></label>
+            <label>Email address<input type="email" @bind="email" required placeholder="you@example.com" /></label>
+            <div class="form-columns"><label>Password<input type="password" @bind="password" required /></label><label>Confirm password<input type="password" @bind="confirmation" required /></label></div>
+            <button class="button" type="submit">Create account</button>
+        </form>
+        @if (message is not null) { <div class="form-message">@message</div> }
+        <small>Already registered? <NavLink href="login">Log in</NavLink></small>
+    </div>
+</section>
+
+@code {
+    private string displayName = string.Empty;
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private string confirmation = string.Empty;
+    private string? message;
+
+    // TODO(Student Exercise 4): Implement user registration.
+    private void Submit() => message = password == confirmation
+        ? "Registration is a frontend-only demo in this starter project."
+        : "The passwords do not match.";
+}

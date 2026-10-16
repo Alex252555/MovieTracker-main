@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="MovieTracker.API/MovieTracker.API.csproj" />
+    <Project Path="MovieTracker.Application/MovieTracker.Application.csproj" />
+    <Project Path="MovieTracker.Domain/MovieTracker.Domain.csproj" />
+    <Project Path="MovieTracker.Infrastructure/MovieTracker.Infrastructure.csproj" />
+    <Project Path="MovieTracker.Web/MovieTracker.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MovieTracker.IntegrationTests/MovieTracker.IntegrationTests.csproj" />
+    <Project Path="tests/MovieTracker.UnitTests/MovieTracker.UnitTests.csproj" />
+  </Folder>
+</Solution>

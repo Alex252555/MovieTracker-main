@@ -1,0 +1,143 @@
+@page "/movies"
+@inject MovieApiClient MovieApiClient
+
+<PageTitle>Movies</PageTitle>
+
+<section class="page-header page-section">
+    <span class="eyebrow">THE CATALOGUE</span>
+    <h1>Find your next favourite</h1>
+    <p>This list is loaded from the MovieTracker API and its in-memory catalogue.</p>
+    <button class="button" @onclick="ToggleCreateForm">@(showCreateForm ? "Cancel" : "Add movie")</button>
+</section>
+
+@if (showCreateForm)
+{
+    <section class="movie-form page-section">
+        <h2>Add a movie</h2>
+        @if (createErrorMessage is not null)
+        {
+            <p class="form-message" role="alert">@createErrorMessage</p>
+        }
+        <EditForm Model="createModel" OnValidSubmit="CreateMovieAsync">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="movie-form-grid">
+                <label>Title <InputText @bind-Value="createModel.Title" /></label>
+                <label>Genre
+                    <InputSelect @bind-Value="createModel.Genre">
+                        @foreach (var genre in Genres)
+                        {
+                            <option value="@genre">@FormatGenre(genre)</option>
+                        }
+                    </InputSelect>
+                </label>
+                <label>Release year <InputNumber @bind-Value="createModel.ReleaseYear" /></label>
+                <label>Poster URL <InputText @bind-Value="createModel.PosterUrl" /></label>
+                <label class="movie-form-wide">Description <InputTextArea @bind-Value="createModel.Description" /></label>
+            </div>
+            <button class="button" type="submit" disabled="@isCreating">@(isCreating ? "Adding…" : "Create movie")</button>
+        </EditForm>
+    </section>
+}
+
+@if (createSuccessMessage is not null)
+{
+    <p class="form-message page-section" role="status">@createSuccessMessage</p>
+}
+
+@if (isLoading)
+{
+    <div class="state-panel"><span class="spinner" aria-hidden="true"></span><h2>Loading movies…</h2><p>Asking the API for the latest catalogue.</p></div>
+}
+else if (errorMessage is not null)
+{
+    <div class="state-panel error-panel" role="alert"><span class="state-icon">!</span><h2>We couldn't load the movies</h2><p>@errorMessage</p><button class="button" @onclick="LoadMoviesAsync">Try again</button></div>
+}
+else if (response is null || response.Items.Count == 0)
+{
+    <div class="state-panel"><h2>No movies yet</h2><p>The in-memory catalogue is ready for its first title.</p></div>
+}
+else
+{
+    <div class="catalogue-meta page-section"><span>@response.TotalCount movies</span><span>Sorted by title</span></div>
+    <section class="movie-grid page-section" aria-label="Movie catalogue">
+        @foreach (var movie in response.Items)
+        {
+            <MovieCard Movie="movie" />
+        }
+    </section>
+}
+
+@code {
+    private MovieListResponseModel? response;
+    private string? errorMessage;
+    private bool isLoading = true;
+    private bool showCreateForm;
+    private bool isCreating;
+    private string? createErrorMessage;
+    private string? createSuccessMessage;
+    private MovieWriteRequestModel createModel = new();
+    private static readonly string[] Genres = ["Action", "Drama", "Comedy", "ScienceFiction", "Thriller", "Animation", "Crime", "Fantasy"];
+
+    protected override Task OnInitializedAsync() => LoadMoviesAsync();
+
+    private async Task LoadMoviesAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+        try
+        {
+            response = await MovieApiClient.GetMoviesAsync();
+        }
+        catch (Exception)
+        {
+            response = null;
+            errorMessage = "Make sure the API is running at the address configured in wwwroot/appsettings.json.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ToggleCreateForm()
+    {
+        showCreateForm = !showCreateForm;
+        createErrorMessage = null;
+        createSuccessMessage = null;
+    }
+
+    private async Task CreateMovieAsync()
+    {
+        isCreating = true;
+        createErrorMessage = null;
+        createSuccessMessage = null;
+        try
+        {
+            await MovieApiClient.CreateMovieAsync(createModel);
+            createModel = new MovieWriteRequestModel();
+            showCreateForm = false;
+            await LoadMoviesAsync();
+            createSuccessMessage = "Movie created successfully.";
+        }
+        catch (HttpRequestException exception)
+        {
+            createErrorMessage = GetOperationError(exception);
+        }
+        finally
+        {
+            isCreating = false;
+        }
+    }
+
+    private static string GetOperationError(HttpRequestException exception) =>
+        exception.StatusCode switch
+        {
+            System.Net.HttpStatusCode.BadRequest => "The API rejected the movie details. Check the fields and try again.",
+            System.Net.HttpStatusCode.Conflict => "A movie with this ID already exists.",
+            _ when exception.StatusCode.HasValue => $"The API request failed (HTTP {(int)exception.StatusCode.Value}).",
+            _ => "Could not reach the API. Make sure it is running at the address configured in wwwroot/appsettings.json."
+        };
+
+    private static string FormatGenre(string genre) => genre == "ScienceFiction" ? "Science Fiction" : genre;
+}

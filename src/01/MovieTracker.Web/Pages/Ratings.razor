@@ -1,0 +1,16 @@
+@page "/ratings"
+
+<PageTitle>Ratings</PageTitle>
+
+<section class="page-header page-section"><span class="eyebrow">YOUR TASTE, CAPTURED</span><h1>My ratings</h1><p>A demo history of films that made an impression.</p><DemoFeatureNotice /></section>
+<section class="page-section data-panel">
+    <div class="data-row data-heading"><span>Movie</span><span>Your rating</span><span>Date rated</span></div>
+    @foreach (var rating in DemoData.Ratings)
+    {
+        <div class="data-row"><strong>@rating.Title</strong><span class="score">★ @rating.Rating.ToString("0.0") / 10</span><span>@rating.RatedOn.ToString("dd MMM yyyy")</span></div>
+    }
+</section>
+
+@code {
+    // TODO(Student Exercise 5): Replace demo ratings with backend data.
+}

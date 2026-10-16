@@ -1,0 +1,211 @@
+@page "/movies/{Id:guid}"
+@inject MovieApiClient MovieApiClient
+@inject NavigationManager NavigationManager
+
+<PageTitle>@(movie?.Title ?? "Movie details")</PageTitle>
+
+@if (isLoading)
+{
+    <div class="state-panel"><span class="spinner" aria-hidden="true"></span><h2>Loading movie details…</h2></div>
+}
+else if (errorMessage is not null)
+{
+    <div class="state-panel error-panel" role="alert"><span class="state-icon">!</span><h2>We couldn't load this movie</h2><p>@errorMessage</p><button class="button" @onclick="LoadMovieAsync">Try again</button></div>
+}
+else if (movie is null)
+{
+    <section class="state-panel"><h1>Movie not found</h1><p>There is no movie with this ID in the catalogue.</p><NavLink class="button" href="movies">Back to movies</NavLink></section>
+}
+else
+{
+    <section class="details-hero page-section">
+        <img src="@movie.PosterUrl" alt="Abstract poster for @movie.Title" />
+        <div>
+            <span class="genre-badge">@FormatGenre(movie.Genre)</span>
+            <h1>@movie.Title</h1>
+            <p class="details-meta">@movie.ReleaseYear</p>
+            <p class="details-description">@movie.Description</p>
+            <div class="details-actions">
+                <button class="button" @onclick="BeginEdit">Edit movie</button>
+                @if (!confirmingDelete)
+                {
+                    <button class="button button-danger" @onclick="() => confirmingDelete = true">Delete movie</button>
+                }
+                else
+                {
+                    <span>Delete this movie?</span>
+                    <button class="button button-danger" @onclick="DeleteMovieAsync" disabled="@isDeleting">@(isDeleting ? "Deleting…" : "Confirm delete")</button>
+                    <button class="button button-secondary" @onclick="() => confirmingDelete = false">Cancel</button>
+                }
+            </div>
+            @if (operationErrorMessage is not null)
+            {
+                <p class="form-message" role="alert">@operationErrorMessage</p>
+            }
+            @if (isEditing)
+            {
+                <section class="movie-form">
+                    <h2>Edit movie</h2>
+                    <EditForm Model="editModel" OnValidSubmit="UpdateMovieAsync">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="movie-form-grid">
+                            <label>Title <InputText @bind-Value="editModel.Title" /></label>
+                            <label>Genre
+                                <InputSelect @bind-Value="editModel.Genre">
+                                    @foreach (var genre in Genres)
+                                    {
+                                        <option value="@genre">@FormatGenre(genre)</option>
+                                    }
+                                </InputSelect>
+                            </label>
+                            <label>Release year <InputNumber @bind-Value="editModel.ReleaseYear" /></label>
+                            <label>Poster URL <InputText @bind-Value="editModel.PosterUrl" /></label>
+                            <label class="movie-form-wide">Description <InputTextArea @bind-Value="editModel.Description" /></label>
+                        </div>
+                        <button class="button" type="submit" disabled="@isUpdating">@(isUpdating ? "Saving…" : "Save changes")</button>
+                        <button class="button button-secondary" type="button" @onclick="CancelEdit">Cancel</button>
+                    </EditForm>
+                </section>
+            }
+            <div class="details-actions">
+                <button class="button" @onclick="ToggleWatchlist">@(inWatchlist ? "✓ In watchlist" : "+ Add to watchlist")</button>
+                @if (demoMessage is not null) { <span class="success-message">@demoMessage</span> }
+            </div>
+            <div class="rate-box">
+                <span>Your rating</span>
+                @foreach (var score in Enumerable.Range(1, 10))
+                {
+                    var capturedScore = score;
+                    <button class="rate-button @(userRating == score ? "selected" : null)" @onclick="() => Rate(capturedScore)">@score</button>
+                }
+            </div>
+        </div>
+    </section>
+    <section class="page-section reviews-section">
+        <DemoFeatureNotice />
+        <div class="section-heading"><div><span class="eyebrow">COMMUNITY NOTES</span><h2>Demo reviews</h2></div></div>
+        <div class="review-grid">
+            <article><b>Maya K. <span>★ 9.0</span></b><p>Beautifully paced and even better on a second viewing.</p></article>
+            <article><b>Alex R. <span>★ 8.5</span></b><p>A memorable film with images that stay with you.</p></article>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter] 
+    public Guid Id { get; set; }
+    private MovieDetailsModel? movie;
+    private bool isLoading = true;
+    private bool inWatchlist;
+    private int? userRating;
+    private string? demoMessage;
+    private string? errorMessage;
+    private MovieWriteRequestModel editModel = new();
+    private bool isEditing;
+    private bool isUpdating;
+    private bool isDeleting;
+    private bool confirmingDelete;
+    private string? operationErrorMessage;
+    private static readonly string[] Genres = ["Action", "Drama", "Comedy", "ScienceFiction", "Thriller", "Animation", "Crime", "Fantasy"];
+
+    protected override Task OnParametersSetAsync() => LoadMovieAsync();
+
+    private async Task LoadMovieAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+        try
+        {
+            movie = await MovieApiClient.GetMovieByIdAsync(Id);
+        }
+        catch (HttpRequestException)
+        {
+            movie = null;
+            errorMessage = "Make sure the API is running at the address configured in wwwroot/appsettings.json.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ToggleWatchlist() { inWatchlist = !inWatchlist; demoMessage = "Saved locally for this demo session."; }
+    private void Rate(int score) { userRating = score; demoMessage = $"Demo rating set to {score}/10."; }
+
+    private void BeginEdit()
+    {
+        if (movie is null)
+        {
+            return;
+        }
+
+        editModel = new MovieWriteRequestModel
+        {
+            Title = movie.Title,
+            Description = movie.Description,
+            Genre = movie.Genre,
+            ReleaseYear = movie.ReleaseYear,
+            PosterUrl = movie.PosterUrl
+        };
+        operationErrorMessage = null;
+        isEditing = true;
+    }
+
+    private void CancelEdit()
+    {
+        isEditing = false;
+        operationErrorMessage = null;
+    }
+
+    private async Task UpdateMovieAsync()
+    {
+        isUpdating = true;
+        operationErrorMessage = null;
+        try
+        {
+            await MovieApiClient.UpdateMovieAsync(Id, editModel);
+            isEditing = false;
+            await LoadMovieAsync();
+        }
+        catch (HttpRequestException exception)
+        {
+            operationErrorMessage = GetOperationError(exception);
+        }
+        finally
+        {
+            isUpdating = false;
+        }
+    }
+
+    private async Task DeleteMovieAsync()
+    {
+        isDeleting = true;
+        operationErrorMessage = null;
+        try
+        {
+            await MovieApiClient.DeleteMovieAsync(Id);
+            NavigationManager.NavigateTo("/movies");
+        }
+        catch (HttpRequestException exception)
+        {
+            operationErrorMessage = GetOperationError(exception);
+            confirmingDelete = false;
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private static string GetOperationError(HttpRequestException exception) =>
+        exception.StatusCode switch
+        {
+            System.Net.HttpStatusCode.BadRequest => "The API rejected the movie details. Check the fields and try again.",
+            System.Net.HttpStatusCode.NotFound => "This movie no longer exists in the catalogue.",
+            _ when exception.StatusCode.HasValue => $"The API request failed (HTTP {(int)exception.StatusCode.Value}).",
+            _ => "Could not reach the API. Make sure it is running at the address configured in wwwroot/appsettings.json."
+        };
+
+    private static string FormatGenre(string genre) => genre == "ScienceFiction" ? "Science Fiction" : genre;
+}

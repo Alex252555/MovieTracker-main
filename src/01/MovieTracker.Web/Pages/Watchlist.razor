@@ -1,0 +1,36 @@
+@page "/watchlist"
+
+<PageTitle>Watchlist</PageTitle>
+
+<section class="page-header page-section"><span class="eyebrow">YOUR QUEUE</span><h1>Watchlist</h1><p>Keep every film in sight, from first interest to final credits.</p><DemoFeatureNotice /></section>
+
+@foreach (var group in items.GroupBy(item => item.Status))
+{
+    <section class="page-section watchlist-group">
+        <div class="section-heading"><h2>@group.Key</h2><span>@group.Count()</span></div>
+        <div class="watchlist-list">
+            @foreach (var item in group)
+            {
+                <article><img src="@item.Movie.PosterPath" alt="" /><div><h3>@item.Movie.Title</h3><p>@item.Movie.Year · @item.Movie.Genre · ★ @item.Movie.Rating</p></div><button class="quiet-button" @onclick="() => Advance(item.Movie.Id)">Move forward →</button></article>
+            }
+        </div>
+    </section>
+}
+
+@code {
+    private sealed record WatchItem(DemoMovie Movie, string Status);
+    private readonly List<WatchItem> items =
+    [
+        new(DemoData.Movies[1], "Want to Watch"), new(DemoData.Movies[2], "Want to Watch"),
+        new(DemoData.Movies[0], "Watching"), new(DemoData.Movies[3], "Watched"), new(DemoData.Movies[4], "Watched")
+    ];
+
+    // TODO(Student Exercise 4): Load the authenticated user's watchlist from the backend.
+    private void Advance(Guid id)
+    {
+        var index = items.FindIndex(item => item.Movie.Id == id);
+        if (index < 0) return;
+        var status = items[index].Status == "Want to Watch" ? "Watching" : "Watched";
+        items[index] = items[index] with { Status = status };
+    }
+}

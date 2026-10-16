@@ -1,0 +1,28 @@
+@page "/login"
+
+<PageTitle>Log in</PageTitle>
+
+<section class="auth-wrap page-section">
+    <div class="auth-card">
+        <span class="brand-mark">M</span>
+        <span class="eyebrow">WELCOME BACK</span>
+        <h1>Log in to MovieTracker</h1>
+        <p>Continue building your personal cinema journal.</p>
+        <form @onsubmit="Submit" @onsubmit:preventDefault>
+            <label>Email address<input type="email" @bind="email" required placeholder="you@example.com" /></label>
+            <label>Password<input type="password" @bind="password" required placeholder="Your password" /></label>
+            <button class="button" type="submit">Log in</button>
+        </form>
+        @if (message is not null) { <div class="form-message">@message</div> }
+        <small>New here? <NavLink href="register">Create an account</NavLink></small>
+    </div>
+</section>
+
+@code {
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private string? message;
+
+    // TODO(Student Exercise 4): Implement login and JWT authentication.
+    private void Submit() => message = "Authentication is not implemented in the starter project.";
+}

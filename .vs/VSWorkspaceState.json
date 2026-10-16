@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\01",
+    "\\src\\01\\MovieTracker.Domain",
+    "\\src\\01\\MovieTracker.Infrastructure",
+    "\\src\\01\\MovieTracker.Web"
+  ],
+  "SelectedNode": "\\src\\01\\MovieTracker.sln",
+  "PreviewInSolutionExplorer": false
+}

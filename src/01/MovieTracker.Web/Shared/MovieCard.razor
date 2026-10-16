@@ -1,0 +1,15 @@
+<article class="movie-card">
+    <NavLink class="poster-link" href="@($"movies/{Movie.Id}")" aria-label="@($"View {Movie.Title} details")">
+        <img src="@Movie.PosterUrl" alt="Abstract poster for @Movie.Title" loading="lazy" />
+    </NavLink>
+    <div class="movie-card-body">
+        <span class="genre-badge">@FormatGenre(Movie.Genre)</span>
+        <h2><NavLink href="@($"movies/{Movie.Id}")">@Movie.Title</NavLink></h2>
+        <p>@Movie.ReleaseYear</p>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public MovieListItemModel Movie { get; set; } = null!;
+    private static string FormatGenre(string genre) => genre == "ScienceFiction" ? "Science Fiction" : genre;
+}

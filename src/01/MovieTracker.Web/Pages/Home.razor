@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<section class="hero page-section">
+    <div>
+        <span class="eyebrow">YOUR PERSONAL CINEMA JOURNAL</span>
+        <h1>Remember every story<br />that moved you.</h1>
+        <p>Discover movies, keep a watchlist, and turn everything you watch into a collection that is uniquely yours.</p>
+        <div class="hero-actions">
+            <NavLink class="button" href="movies">Browse movies</NavLink>
+            <NavLink class="text-link" href="watchlist">Open my watchlist →</NavLink>
+        </div>
+    </div>
+    <div class="hero-panel" aria-label="Demo viewing summary">
+        <span class="hero-kicker">This month</span>
+        <strong>6</strong>
+        <span>films watched</span>
+        <div class="mini-rating">Average rating <b>8.2</b></div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="section-heading"><div><span class="eyebrow">PICK UP WHERE YOU LEFT OFF</span><h2>Continue watching</h2></div><NavLink href="watchlist">View watchlist →</NavLink></div>
+    <div class="preview-row">
+        @foreach (var movie in DemoData.Movies.Take(3))
+        {
+            <NavLink class="preview-card" href="@($"movies/{movie.Id}")">
+                <img src="@movie.PosterPath" alt="" />
+                <span><b>@movie.Title</b><small>@movie.Year · @movie.Genre</small></span>
+            </NavLink>
+        }
+    </div>
+</section>
+
+<section class="stats-strip page-section">
+    <div><strong>42</strong><span>Movies watched</span></div>
+    <div><strong>7.8</strong><span>Average rating</span></div>
+    <div><strong>18h</strong><span>Watched this month</span></div>
+    <div><strong>Sci-Fi</strong><span>Favourite genre</span></div>
+</section>
+
+@code {
+    // TODO(Student Exercise 5): Replace this demo dashboard with personalized backend data.
+}

@@ -1,0 +1,131 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DC1D6570-9D1F-4646-AACD-36F4BB8E841B}|Solution Items{DC1D6570-9D1F-4646-AACD-36F4BB8E841B}|C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\Directory.Build.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{DC1D6570-9D1F-4646-AACD-36F4BB8E841B}|Solution Items{DC1D6570-9D1F-4646-AACD-36F4BB8E841B}|solutionrelative:Directory.Build.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3651E41-D36B-4B89-82FC-2313F7937E4D}|MovieTracker.Web\\MovieTracker.Web.csproj|c:\\users\\alex\\downloads\\movietracker-main\\movietracker-main\\src\\01\\movietracker.web\\movietracker.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C3651E41-D36B-4B89-82FC-2313F7937E4D}|MovieTracker.Web\\MovieTracker.Web.csproj|solutionrelative:movietracker.web\\movietracker.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{908AC5A1-4644-43EC-AB65-EB0993F8D7C0}|MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj|c:\\users\\alex\\downloads\\movietracker-main\\movietracker-main\\src\\01\\movietracker.infrastructure\\movietracker.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{908AC5A1-4644-43EC-AB65-EB0993F8D7C0}|MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj|solutionrelative:movietracker.infrastructure\\movietracker.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FCFFB460-4380-40E6-900D-7B5865519687}|MovieTracker.API\\MovieTracker.API.csproj|c:\\users\\alex\\downloads\\movietracker-main\\movietracker-main\\src\\01\\movietracker.api\\movietracker.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FCFFB460-4380-40E6-900D-7B5865519687}|MovieTracker.API\\MovieTracker.API.csproj|solutionrelative:movietracker.api\\movietracker.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAE111AB-6A67-4CCB-A2ED-7AC80679B5B7}|MovieTracker.Domain\\MovieTracker.Domain.csproj|c:\\users\\alex\\downloads\\movietracker-main\\movietracker-main\\src\\01\\movietracker.domain\\movietracker.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BAE111AB-6A67-4CCB-A2ED-7AC80679B5B7}|MovieTracker.Domain\\MovieTracker.Domain.csproj|solutionrelative:movietracker.domain\\movietracker.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 297,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MovieTracker.Web.csproj",
+              "DocumentMoniker": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Web\\MovieTracker.Web.csproj",
+              "RelativeDocumentMoniker": "MovieTracker.Web\\MovieTracker.Web.csproj",
+              "ToolTip": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Web\\MovieTracker.Web.csproj",
+              "RelativeToolTip": "MovieTracker.Web\\MovieTracker.Web.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-16T05:23:26.292Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MovieTracker.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj",
+              "RelativeToolTip": "MovieTracker.Infrastructure\\MovieTracker.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-16T05:23:25.484Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MovieTracker.API.csproj",
+              "DocumentMoniker": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.API\\MovieTracker.API.csproj",
+              "RelativeDocumentMoniker": "MovieTracker.API\\MovieTracker.API.csproj",
+              "ToolTip": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.API\\MovieTracker.API.csproj",
+              "RelativeToolTip": "MovieTracker.API\\MovieTracker.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-16T05:23:23.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MovieTracker.Domain.csproj",
+              "DocumentMoniker": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Domain\\MovieTracker.Domain.csproj",
+              "RelativeDocumentMoniker": "MovieTracker.Domain\\MovieTracker.Domain.csproj",
+              "ToolTip": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\MovieTracker.Domain\\MovieTracker.Domain.csproj",
+              "RelativeToolTip": "MovieTracker.Domain\\MovieTracker.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-16T05:23:18.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Directory.Build.props",
+              "DocumentMoniker": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\Directory.Build.props",
+              "RelativeDocumentMoniker": "Directory.Build.props",
+              "ToolTip": "C:\\Users\\Alex\\Downloads\\MovieTracker-main\\MovieTracker-main\\src\\01\\Directory.Build.props",
+              "RelativeToolTip": "Directory.Build.props",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-10-16T05:30:09.386Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 103,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
